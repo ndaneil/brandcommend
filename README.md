@@ -1,6 +1,6 @@
 ## Brandcommend - share your favorite brands, be part of exclusive communities, connect with brands like never before!
 
-![LOGO](./frontent/imgs/brancommend_white_cropped.png)
+![LOGO](frontend/imgs/brancommend_white_cropped.png)
 
 **A live demo is available here: [brandcommend.pages.dev](https://brandcommend.pages.dev/)**
 
