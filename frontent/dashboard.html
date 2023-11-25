@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My brand dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <style>
+        /* Existing CSS styles */
+
+        .dashboard-container {
+            display: flex;
+            background-color: #999;
+            color: #000;
+        }
+
+        .dashboard-sidebar {
+            width: 20%;
+            background-color: #222;
+        }
+
+        .sidebar-menu {
+            list-style-type: none;
+            padding: 0;
+        }
+
+
+        .dashboard-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dashboard-header {
+            background-color: #555;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dashboard-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        button {
+            padding: 16px 20px;
+            background-color: #444;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .dashboard-content {
+            margin: auto;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        body {
+            font-size: 24px;
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans', sans-serif;
+            /*background-color: #c8d9ed;*/
+            color: #E8E8E8;
+            width: 100vw;
+            height: 100vh;
+            background-image: linear-gradient(#29ADB2, #0766AD);
+            background-size: cover;
+            /*height: 100%;*/
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-attachment: fixed;
+        }
+
+        table{
+            width: 100%;
+            margin: auto;
+        }
+        tr>:nth-child(1) {
+            padding: 5px;
+            text-align: right;
+            width: 50%;
+        }
+        tr>:nth-child(2) {
+            padding: 5px;
+            text-align: left;
+            width: 50%;
+            font-weight: bold;
+        }
+
+
+
+
+
+        /* Add specific styles for the buttons, sidebar, and header based on your design */
+
+    </style>
+</head>
+<body class="dashboard">
+
+<main class="dashboard-main">
+    <header class="dashboard-header">
+        <h1>Brand Campaign Management</h1>
+        <div class="header-buttons">
+            <button onclick="window.location.href='/';">Homepage</button>
+        </div>
+    </header>
+    <div class="dashboard-content">
+        <h2>Summary:</h2>
+        <table>
+            <tr>
+                <td>Fans:</td>
+                <td>11 541</td>
+            </tr>
+            <tr>
+                <td>Last campaign engagement:</td>
+                <td>74%</td>
+            </tr>
+        </table>
+        <div style="width: 100%;margin: auto">
+            <h2>You audience:</h2>
+            <canvas id="members"></canvas>
+            <br>
+            <table>
+                <tr>
+                    <td style="width: 50%;margin: auto"><canvas id="demographic"></canvas></td>
+                    <td style="width: 50%;margin: auto"><canvas id="demographic2"></canvas></td>
+                </tr>
+            </table>
+            <br>
+            <h2>Recent campaigns</h2>
+            <canvas id="campaings"></canvas>
+            <br>
+            <canvas id="volume"></canvas>
+
+        </div>
+        <br>
+        <button style="width: 100%;padding: 10px;" onclick="window.location.href='/community-page.html';">Open community management portal</button>
+        <br>&nbsp;<br>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+    Chart.defaults.backgroundColor = '#fff';
+    Chart.defaults.borderColor = '#36A2EB';
+    Chart.defaults.color = '#fff';
+  const ctx = document.getElementById('members');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['June', 'July', 'August', 'September', 'October', 'November'],
+      datasets: [{
+        label: 'fans',
+        data: [1500,2543,4321,7659,8000,11541],
+          backgroundColor: 'rgba(255, 255, 255, 0.5)', // Bar fill color
+          borderColor: 'rgba(255, 255, 255, 1)', // Bar border color
+          borderWidth: 2
+      },{
+          label: 'Fanclub members',
+          data: [200,450,843,1460,1894,3176],
+          backgroundColor: 'rgba(255, 255, 0, 0.5)', // Bar fill color
+          borderColor: 'rgba(255, 255, 0, 1)', // Bar border color
+          borderWidth: 2
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  const ctx2 = document.getElementById('campaings');
+  new Chart(ctx2, {
+      type: 'bar',
+      data: {
+          labels: ['Black friday discount', 'Autumn sale', 'Secret early access', 'Summer sale', 'Launch discount'],
+          datasets: [{
+              label: 'Campaign Performance',
+              data: [60, 45, 30, 65, 43],
+              backgroundColor: 'rgba(255, 255, 255, 0.5)', // Bar fill color
+              borderColor: 'rgba(255, 255, 255, 1)', // Bar border color
+              borderWidth: 2
+          }]
+      },
+      options: {
+              indexAxis: 'y',
+              // Elements options apply to all of the options unless overridden in a dataset
+              // In this case, we are setting the border of each horizontal bar to be 2px wide
+              elements: {
+                  bar: {
+                      borderWidth: 2,
+                  }
+              },
+              responsive: true,
+              plugins: {
+                  legend: {
+                      position: 'top'
+                  },
+                  title: {
+                      display: true,
+                      text: 'Coupon usage so far'
+                  }
+              },
+              scales: {
+                  x : {
+                      max: 100,
+                      min: 0,
+                      ticks: {
+                          stepSize: 10
+                      }
+                  }
+              }
+          }
+  });
+
+  const ctx3 = document.getElementById('demographic');
+    new Chart(ctx3, {
+        type: "pie",
+        data: {
+            labels: ["18-25","26-40","40-50","50-60","60+"],
+            datasets: [{
+                data: [7237,3105,605,594,0],
+                borderWidth: 2,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top'
+                },
+                title: {
+                    display: true,
+                    text: 'Age'
+                }
+            }
+        }
+    });
+    const ctx4 = document.getElementById('demographic2');
+    new Chart(ctx4, {
+        type: "pie",
+        data: {
+            labels: ["female","male","other"],
+            datasets: [{
+                data: [5052,6432,57],
+                borderWidth: 2,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top'
+                },
+                title: {
+                    display: true,
+                    text: 'Gender'
+                }
+            }
+        }
+    });
+    const ctx5 = document.getElementById('volume');
+    new Chart(ctx5, {
+        type: "bar",
+        data: {
+            labels: ['June','July','August','September','October','November'],
+            datasets: [{
+                label: 'Black friday discount',
+                data: [0, 0, 0, 0, 0, 31120],
+                borderWidth: 2
+            },{
+                label: 'Autumn sale',
+                data: [0, 0, 0, 11342, 12532, 4340],
+                borderWidth: 2
+            },{
+                label: 'Secret early access',
+                data: [0, 6541, 1240, 0, 0, 0],
+                borderWidth: 2
+            },{
+                label: 'Summer sale',
+                data: [1255, 6543, 3160, 0, 0, 0],
+                borderWidth: 2
+            },{
+                label: 'Launch discount',
+                data: [21432, 0, 0, 0, 0, 0],
+                borderWidth: 2
+            },{
+                label: 'All campaigns',
+                data: [1255+21432, 6541+6543, 3160+1240, 11342, 12532, 31120+4340],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            indexAxis: 'x',
+            // Elements options apply to all of the options unless overridden in a dataset
+            // In this case, we are setting the border of each horizontal bar to be 2px wide
+            elements: {
+                bar: {
+                    borderWidth: 2,
+                }
+            },
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top'
+                },
+                title: {
+                    display: true,
+                    text: 'Volume generated [USD]'
+                }
+            },
+
+        }
+    });
+
+
+</script>
+
+
+</body>
+</html>
